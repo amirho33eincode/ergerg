@@ -27,4 +27,4 @@ def home():
 if __name__ == "__main__":
     # Run the bot in a separate thread
     app.start()
-    flask_app.run(host='0.0.0.0', port=80)  # Default port for Vercel apps
+    flask_app.run(port=5000)  # Default port for Vercel apps
