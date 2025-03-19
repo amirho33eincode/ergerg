@@ -16,8 +16,7 @@ flask_app = Flask(__name__)
 @app.on_message(filters.command("start"))  # Listen for /start command
 def start_command(client, message):
     # Use client.send_message to send a message to the chat
-    chat_id = message.chat.id  # Get the chat ID
-    client.send_message(chat_id, "Hello! Your bot has started! 😊")
+    return "FUCKING"
 
 @flask_app.route("/")
 def home():
