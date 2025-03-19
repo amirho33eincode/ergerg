@@ -25,5 +25,6 @@ def home():
 # Start the bot and Flask app
 if __name__ == "__main__":
     # Run the bot in a separate thread
+    print("BOT IS RUNNIG >>>")
     app.start()
     flask_app.run(port=5000)  # Default port for Vercel apps
