@@ -1,5 +1,6 @@
 import os
 from pyrogram import Client, filters
+from flask import Flask
 
 # Fetching environment variables
 api_id = os.getenv('API_ID')  # Set this in your environment variables
@@ -9,23 +10,21 @@ bot_token = os.getenv('BOT_TOKEN')  # Set this in your environment variables
 # Initialize Pyrogram Client with environment variables
 app = Client("my_bot", api_id=api_id, api_hash=api_hash, bot_token=bot_token)
 
+# Initialize Flask app
+flask_app = Flask(__name__)
+
 @app.on_message(filters.command("start"))  # Listen for /start command
 def start_command(client, message):
     # Use client.send_message to send a message to the chat
     chat_id = message.chat.id  # Get the chat ID
     client.send_message(chat_id, "Hello! Your bot has started! 😊")
 
-class handler(BaseHTTPRequestHandler):
-    def do_GET(self):
-        # Your logic to handle requests and interact with Telegram goes here
-        self.send_response(200)
-        self.send_header('Content-type', 'text/plain')
-        self.end_headers()
-        self.wfile.write(b'Pyrogram bot is running!')
+@flask_app.route("/")
+def home():
+    return "Pyrogram bot is running!"
 
-
-
-# Start the bot
+# Start the bot and Flask app
 if __name__ == "__main__":
-    app.run()  # Start the bot
-
+    # Run the bot in a separate thread
+    app.start()
+    flask_app.run(host='0.0.0.0', port=80)  # Default port for Vercel apps
